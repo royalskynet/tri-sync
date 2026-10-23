@@ -6,6 +6,8 @@ Per-file three-way sync between a folder in a GitHub-backed git repo and the sam
 
 ## When to use it
 
+> If you can make both machines clones of the same repo (a sparse clone works for a subfolder), do that instead: a scheduled `git pull --rebase --autostash && git push` plus `log.md merge=union` in `.gitattributes` is simpler. tri-sync is for when the histories cannot be joined or one side may not push.
+
 You have the same set of notes (e.g. an LLM wiki) in two places that both get written to:
 
 - **LOCAL**: a clone of a shared GitHub repo. The folder may be a subdirectory (`notes/research/`). LOCAL is the only side that pushes.
@@ -95,6 +97,8 @@ Covers one-side edits, both-side `log.md` merge, NFD file names, deletion, confl
 把 GitHub repo 裡的某個資料夾，跟另一台機器上**歷史不相干**的 git repo 做逐檔三方同步。只用 Python 3.9+ 標準函式庫和 git。
 
 ### 適用情境
+
+> 如果兩台機器可以改成同一個 repo 的 clone（子資料夾可用 sparse clone），就直接那樣做：排程跑 `git pull --rebase --autostash && git push`，`.gitattributes` 設 `log.md merge=union`，比較簡單。tri-sync 只適合歷史接不起來、或其中一邊不能 push 的情況。
 
 同一批筆記（例如 LLM wiki）在兩處都會被寫入：
 
